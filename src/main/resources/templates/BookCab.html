@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Cab</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input[type="date"],
+        input[type="text"],
+        select {
+            width: calc(100% - 16px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="#333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 8px top 50%;
+            background-size: 16px;
+            padding-right: 32px;
+        }
+        input[type="submit"] {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Book Cab</h2>
+    <form method="post" action="http://localhost:8080/bookingAPI/createBooking" enctype="application/x-www-form-urlencoded">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="from">From:</label>
+        <select id="from" name="start" required>
+            <option value="" disabled selected>Select origin</option>
+            <option th:each="from : ${from}" th:text="${from}"></option>
+        </select>
+
+        <label for="to">To:</label>
+        <select id="to" name="end" required>
+            <option value="" disabled selected>Select destination</option>
+            <option th:each="to : ${to}" th:text="${to}"></option>
+        </select>
+
+        <label for="vehicle">Vehicle:</label>
+        <select id="vehicle" name="vechName" required>
+            <option value="" disabled selected>Select vehicle</option>
+            <option th:each="vechName : ${vechNames}" th:text="${vechName}"></option>
+        </select>
+
+        <label for="customerName">Customer Name:</label>
+        <input type="text" id="customerName" placeholder="Enter customer name" name="customerName" required>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" placeholder="Enter phone number" name="phone" required>
+
+        <input type="submit" value="Book Now">
+    </form>
+</div>
+
+</body>
+</html>
